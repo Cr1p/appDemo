@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ClienteMapper">
+
+	<resultMap id="ClienteResultMap" type="com.app.demo.entidad.Cliente">
+		<result property="idCliente" column="id_cliente"></result>
+		<result property="nomCliente" column="nombre_cliente"></result>
+		<result property="apPaternoCliente" column="ap_paterno_cliente"></result>
+		<result property="apMaternoCliente" column="ap_materno_cliente"></result>
+		<result property="feNacimiento" column="fe_nacimiento"></result>
+		<result property="feMuerte" column="fe_muerte"></result>
+		<result property="feProbableMuerte" column="fe_probable_muerte"></result>
+	</resultMap>
+	
+	<resultMap id="ConfirmacionResultMap" type="com.app.demo.entidad.Confirmacion">
+		<result property="id" column="id_result"></result>
+		<result property="mensaje" column="mensaje"></result>
+	</resultMap>
+
+	<select id="ObtenerCliente" resultMap="ClienteResultMap">
+		select * from "General".fn_ge_select_cliente()
+	</select>
+	
+	<select id="insertarCliente" resultMap="ConfirmacionResultMap">
+		select * from "General".fn_ge_insert_cliente(#{clienteJSON})
+	</select>
+		<select id="actualizarCliente" resultMap="ConfirmacionResultMap">
+		select * from "General".fn_ge_select_cliente(#{clienteJSON})
+	</select>
+		<select id="eliminarCliente" resultMap="ConfirmacionResultMap">
+		select * from "General".fn_ge_delete_cliente(#{idCliente})
+	</select>
+</mapper>
